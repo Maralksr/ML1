@@ -30,6 +30,7 @@ def show_images(data):
     fig2.axes.get_yaxis().set_visible(False)
     
     plt.show()
+    fig.savefig('DsplayImg.png')
     
     '''
     This function is used for plot image and save it.
@@ -45,7 +46,7 @@ def show_images(data):
 def show_features(data, label):
     x=data[:,0]
     y=data[:,1]
-    plt.figure()
+    fig=plt.figure()
     plt.xlabel('Average Intensity', rotation= 'horizontal')
     plt.ylabel('Symmetry', rotation= 'vertical')
     for ii in range(len(x)):
@@ -54,7 +55,7 @@ def show_features(data, label):
         elif label[ii]==-1:
             plt.scatter(x[ii],y[ii], c='b', marker= '+')
     plt.title('Feature Visualization')
-            
+    fig.savefig('ShowScatterFeature.png')        
 
 
 '''
@@ -100,7 +101,7 @@ def perceptron(data, label, max_iter, learning_rate):
 def show_result(data, label, w):
     x=data[:,0]
     y=data[:,1]
-    plt.figure()
+    fig=plt.figure()
     plt.xlabel('Average Intensity', rotation= 'horizontal')
     plt.ylabel('Symmetry', rotation= 'vertical')
     for ii in range(len(x)):
@@ -112,6 +113,7 @@ def show_result(data, label, w):
     plt.xlim(-1, .25)
     plt.ylim(-1, .25)
     plt.title('Results/ Feature Visualization and Separator')
+    fig.savefig('ShowScatterFeatureResult.png') 
     
 
 
@@ -136,19 +138,18 @@ def accuracy_perceptron(data, label, w):
     mistakes = 0
     for i in range(n):
         if sign(np.dot(data[i,:],np.transpose(w))) != label[i]:
-            mistakes += 1
+            mistakes+=1
     return (n-mistakes)/n
-   
-
 
 def test_perceptron(max_iter, learning_rate):
-	#get data
-	traindataloc,testdataloc = "../data/train.txt", "../data/test.txt"
-	train_data,train_label = load_features(traindataloc)
-	test_data, test_label = load_features(testdataloc)
-	#train perceptron
-	w = perceptron(train_data, train_label, max_iter, learning_rate)
-	train_acc = accuracy_perceptron(train_data, train_label, w)	
-	#test perceptron model
-	test_acc = accuracy_perceptron(test_data, test_label, w)
-	return w, train_acc, test_acc
+    #get data
+    traindataloc,testdataloc = "../data/train.txt", "../data/test.txt"
+    train_data,train_label = load_features(traindataloc)
+    test_data, test_label = load_features(testdataloc)
+    #train perceptron
+    w = perceptron(train_data, train_label, max_iter, learning_rate)	
+    #test perceptron model
+    train_acc = accuracy_perceptron(train_data, train_label, w)
+    test_acc = accuracy_perceptron(test_data, test_label, w)
+    return w, train_acc, test_acc
+

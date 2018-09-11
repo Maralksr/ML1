@@ -8,7 +8,7 @@ def play_with_data():
 	nums = 2
 	data = load_data(traindataloc)[0:nums,1:]
 	[n,d]=data.shape
-	w= math.floor(math.sqrt(d))
+	w= int(math.floor(math.sqrt(d)))
 	data = np.reshape(data, (nums, w, w))
 	show_images(data)
 	print("play with data done!")
@@ -38,14 +38,14 @@ def test_accuracy():
 
 
 def play_with_result():
-	traindataloc,testdataloc = "../data/train.txt", "../data/test.txt"
-	train_data,train_label = load_features(traindataloc)
-	test_data, test_label = load_features(testdataloc)
-	max_iter = 10
-	learning_rate = 0.5
-	w = perceptron(train_data, train_label, max_iter, learning_rate)	
-	show_result(test_data[:,1:3], test_label, w)
-	print("play with result done!")
+    traindataloc,testdataloc = "../data/train.txt", "../data/test.txt"
+    train_data,train_label = load_features(traindataloc)
+    test_data, test_label = load_features(testdataloc)
+    max_iter=10
+    learning_rate=0.5
+    w = perceptron(train_data, train_label, max_iter, learning_rate)	
+    show_result(test_data[:,1:3], test_label, w)
+    print("play with result done!")
 
 
 if __name__ == '__main__':
